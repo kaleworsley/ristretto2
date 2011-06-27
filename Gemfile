@@ -13,6 +13,7 @@ gem 'sass'
 gem 'therubyracer'
 gem 'barista'
 gem 'simple_form'
+gem 'devise'
 
 
 # Use unicorn as the web server
