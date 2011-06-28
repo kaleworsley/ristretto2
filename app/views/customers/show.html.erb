@@ -1,10 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% title @customer.name %>
 
-<p>
-  <b>Name:</b>
-  <%= @customer.name %>
-</p>
-
+<div class="main-details">
 <p>
   <b>Physical Address:</b>
   <%= @customer.default_unit.physical_address %>
@@ -14,8 +10,17 @@
   <b>Postal Address:</b>
   <%= @customer.default_unit.postal_address %>
 </p>
+<% # FIXME: This should be moved into the model %>
+<% @customer.default_unit.phone["type"].zip(@customer.default_unit.phone["number"]).reject {|a| a[0].blank? || a[1].blank? }.each do |p| %>
+<p>
+  <b><%= p[0] %>:</b>
+  <%= p[1] %>
+</p>
 
+<% end %>
+</div>
 
+<div class="units">
 <% @customer.units.each do |unit| %>
 <div class="unit">
 <p>
@@ -32,8 +37,19 @@
   <b>Postal Address:</b>
   <%= unit.postal_address %>
 </p>
+
+<% unit.phone["type"].zip(unit.phone["number"]).reject {|a| a[0].blank? || a[1].blank? }.each do |p| %>
+<p>
+  <b><%= p[0] %>:</b>
+  <%= p[1] %>
+</p>
+
+<% end %>
+
 </div>
 <% end %>
+</div>
 
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>
+
