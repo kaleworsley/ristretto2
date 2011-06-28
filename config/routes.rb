@@ -1,4 +1,5 @@
 Ristretto::Application.routes.draw do
+  resources :customers
 
   devise_for :users do
     get '/login' => 'devise/sessions#new', :as => :new_user_session

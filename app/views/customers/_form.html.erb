@@ -1,0 +1,47 @@
+<%= simple_form_for(@customer) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :name %>
+
+    <%= f.simple_fields_for :default_unit do |d|  %>
+      <%= d.input :default, :as => :hidden %>
+      <%= d.input :physical_address %>
+      <%= d.input :postal_address %>
+      <div class="default_phone">
+	<%= d.label :phone %>
+	<%= d.fields_for :phone do |p| %>
+	<% @customer.default_unit.phone['type'].each_index do |index| %>
+        <div id="phone-<%= index.to_s %>">
+          <%= p.fields_for :type do |t| %> <%= t.text_field '', { :value => @customer.default_unit.phone['type'][index].to_s, :id => "default_unit_phone_type_" + index.to_s, :placeholder => 'Work Phone' } %> <% end %> : 
+          <%= p.fields_for :number do |t| %> <%= t.text_field '', { :value => @customer.default_unit.phone['number'][index].to_s,  :id => "default_unit_phone_numbe_" + index.to_s, :placeholder => '+67 3 555 555' } %> <% end %>
+        </div>
+	<% end %>
+	<% end %>
+      </div>
+      
+    <% end %>
+    <div id="units">
+    <%= f.simple_fields_for :units do |d|  %>
+      <%= d.input :name %>
+      <%= d.input :physical_address %>
+      <%= d.input :postal_address %>
+      <div class="phone">
+	<%= d.label :phone %>
+	<%= d.fields_for :phone do |p| %>
+	<% d.object.phone['type'].each_index do |index| %>
+        <div id="phone-<%= index.to_s %>">
+          <%= p.fields_for :type do |t| %> <%= t.text_field '', { :value => d.object.phone['type'][index].to_s, :id => "unit_" + d.object.id.to_s + "_phone_type_" + index.to_s, :placeholder => 'Work Phone' } %> <% end %> : 
+          <%= p.fields_for :number do |t| %> <%= t.text_field '', { :value => d.object.phone['number'][index].to_s,  :id => "unit_" + d.object.id.to_s + "_phone_numbe_" + index.to_s, :placeholder => '+67 3 555 555' } %> <% end %>
+        </div>
+	<% end %>
+	<% end %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

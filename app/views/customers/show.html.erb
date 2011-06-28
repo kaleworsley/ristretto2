@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @customer.name %>
+</p>
+
+<p>
+  <b>Physical Address:</b>
+  <%= @customer.default_unit.physical_address %>
+</p>
+
+<p>
+  <b>Postal Address:</b>
+  <%= @customer.default_unit.postal_address %>
+</p>
+
+
+<% @customer.units.each do |unit| %>
+<div class="unit">
+<p>
+  <b>Name:</b>
+  <%= unit.name %>
+</p>
+
+<p>
+  <b>Physical Address:</b>
+  <%= unit.physical_address %>
+</p>
+
+<p>
+  <b>Postal Address:</b>
+  <%= unit.postal_address %>
+</p>
+</div>
+<% end %>
+
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to 'Back', customers_path %>

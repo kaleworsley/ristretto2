@@ -16,6 +16,10 @@ gem 'simple_form'
 gem 'devise'
 
 
+group :development, :test do
+  gem 'factory_girl_rails'
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

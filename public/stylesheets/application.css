@@ -1,0 +1,7 @@
+body.customers textarea {
+  height: 5em;
+}
+
+label {
+  display: block;
+}
