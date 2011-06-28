@@ -1,1 +1,4 @@
-<%= render @static %>
+<%= cache "static-#{@static}-#{CONFIG[:git_revision]}" do %>
+  <%= render :partial => @static %>
+<% end %>
+

@@ -9,7 +9,7 @@ Ristretto::Application.routes.draw do
   end
 
   root :to => 'static#show', :static => 'home'
-  match '*static' => 'static#show'
+  match ':static' => 'static#show'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -68,3 +68,4 @@ Ristretto::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
 end
+
