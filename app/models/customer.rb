@@ -1,5 +1,6 @@
 class Customer < ActiveRecord::Base
 
+  has_many :projects
   has_many :units, :conditions => { :default => nil }, :dependent => :destroy
   has_one :default_unit, :class_name => "Unit", :conditions => { :default => true }, :dependent => :destroy
 

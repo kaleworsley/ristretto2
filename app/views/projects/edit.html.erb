@@ -1,0 +1,9 @@
+<h1>Editing project</h1>
+
+<%= simple_form_for(@project, :url => customer_project_path(@customer, @project)) do |f| %>
+<%= render 'form', :f => f %>
+<% end %>
+
+<%= link_to 'Show', customer_project_path(@customer, @project) %> |
+<%= link_to 'Back', customer_projects_path %>
+

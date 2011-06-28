@@ -16,7 +16,13 @@ Factory.define :default_unit, :class => :unit do |d|
   d.default true
 end
 
-
 Factory.define :unit do |u|
 
 end
+
+Factory.define :project do |p|
+  p.name "Project"
+  p.association :customer
+  p.association :created_by, :factory => :user
+end
+
