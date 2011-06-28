@@ -7,10 +7,16 @@
   <%= csrf_meta_tag %>
 </head>
 <body class="<%= controller.controller_name %>">
+<h1>Ristretto</h1>
+
+<%= render :partial => 'layouts/navigation' %>
 
 <%= show_flash %>
+
+<%= content_tag :h1, yield(:title) if show_title? %>
 
 <%= yield %>
 
 </body>
 </html>
+

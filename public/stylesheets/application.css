@@ -5,3 +5,8 @@ body.customers textarea {
 label {
   display: block;
 }
+
+nav ul li a.active {
+  font-weight: bold;
+}
+

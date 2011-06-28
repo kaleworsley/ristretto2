@@ -1,0 +1,10 @@
+<%= content_tag :nav do %>
+  <%= content_tag :ul, :id => 'navigation' do %>
+    <%= content_tag :li, link_to_with_active('Login', new_user_session_path) %>
+    <%= content_tag :li, link_to_with_active('Logout', destroy_user_session_path) %>
+    <%= content_tag :li, link_to_with_active('Register', new_user_registration_path) %>
+    <%= content_tag :li, link_to_with_active('Home', root_path) %>
+    <%= content_tag :li, link_to_with_active('Customers', customers_path) %>
+  <% end %>
+<% end %>
+
