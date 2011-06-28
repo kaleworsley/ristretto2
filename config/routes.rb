@@ -1,4 +1,15 @@
 Ristretto::Application.routes.draw do
+
+  devise_for :users do
+    get '/login' => 'devise/sessions#new', :as => :new_user_session
+    post '/login' => 'devise/sessions#create', :as => :user_session
+    get '/logout' => 'devise/sessions#destroy', :as => :destroy_user_session
+    get '/register' => 'devise/registrations#new', :as => :new_user_registration
+  end
+
+  root :to => 'static#show', :static => 'home'
+  match '*static' => 'static#show'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
