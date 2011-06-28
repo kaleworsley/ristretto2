@@ -5,4 +5,6 @@ class Customer < ActiveRecord::Base
 
   accepts_nested_attributes_for :units, :default_unit, :reject_if => proc { |attributes| attributes['name'].blank? unless attributes['default'] }
 
+  has_friendly_id :name, :use_slug => true, :approximate_ascii => true, :max_length => 100
 end
+

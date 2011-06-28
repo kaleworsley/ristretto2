@@ -14,6 +14,7 @@ gem 'therubyracer'
 gem 'barista'
 gem 'simple_form'
 gem 'devise'
+gem 'friendly_id'
 
 
 group :development, :test do
