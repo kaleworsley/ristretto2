@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110629010316) do
+ActiveRecord::Schema.define(:version => 20110629053608) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(:version => 20110629010316) do
     t.string   "name"
     t.text     "physical_address"
     t.text     "postal_address"
-    t.text     "phone"
     t.boolean  "default"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -75,7 +74,6 @@ ActiveRecord::Schema.define(:version => 20110629010316) do
     t.datetime "confirmation_sent_at"
     t.string   "authentication_token"
     t.string   "full_name"
-    t.text     "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "staff"
