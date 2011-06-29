@@ -10,14 +10,14 @@
   <b>Postal Address:</b>
   <%= @customer.default_unit.postal_address %>
 </p>
-<% # FIXME: This should be moved into the model %>
-<% @customer.default_unit.phone["type"].zip(@customer.default_unit.phone["number"]).reject {|a| a[0].blank? || a[1].blank? }.each do |p| %>
-<p>
-  <b><%= p[0] %>:</b>
-  <%= p[1] %>
-</p>
 
+<% @customer.default_unit.phones.each do |p| %>
+<p>
+  <b><%= p.label %>:</b>
+  <%= p.number %>
+</p>
 <% end %>
+
 </div>
 
 <div class="units">
@@ -38,12 +38,11 @@
   <%= unit.postal_address %>
 </p>
 
-<% unit.phone["type"].zip(unit.phone["number"]).reject {|a| a[0].blank? || a[1].blank? }.each do |p| %>
+<% unit.phones.each do |p| %>
 <p>
-  <b><%= p[0] %>:</b>
-  <%= p[1] %>
+  <b><%= p.label %>:</b>
+  <%= p.number %>
 </p>
-
 <% end %>
 
 </div>

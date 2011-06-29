@@ -28,6 +28,7 @@ class CustomersController < ApplicationController
   def new
     @customer = Customer.new
     @customer.build_default_unit(:default => true)
+    @customer.default_unit.phones.build
     @customer.units.build
     respond_to do |format|
       format.html # new.html.erb
@@ -38,7 +39,9 @@ class CustomersController < ApplicationController
   # GET /customers/1/edit
   def edit
     @customer = Customer.find(params[:id])
+    @customer.default_unit.phones.build
     @customer.units.build
+    @customer.units.each {|u| u.phones.build }
   end
 
   # POST /customers
@@ -85,3 +88,4 @@ class CustomersController < ApplicationController
     end
   end
 end
+
