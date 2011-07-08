@@ -1,18 +1,17 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
 
-  <p><%= f.label :email %><br />
-  <%= f.email_field :email %></p>
+  <div class="inputs">
+    <%= f.input :email, :autofocus => true %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+  </div>
 
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
-
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
-
-  <p><%= f.submit "Sign up" %></p>
+  <div class="actions">
+    <%= f.button :submit, "Sign up" %>
+  </div>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>
