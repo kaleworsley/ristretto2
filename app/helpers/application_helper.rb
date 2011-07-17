@@ -32,5 +32,21 @@ module ApplicationHelper
     content_for(:head) { javascript_include_tag(*args) }
   end
 
+  def show_navigation
+    render :partial => 'layouts/navigation'
+  end
+
+  def show_subnavigation
+    controller_name = controller.controller_name.pluralize
+    action_name = controller.action_name
+    views_path = Rails.root.join('app', 'views', controller_name)
+
+    if File.exists?("#{views_path}/_#{action_name}_navigation.html.erb") && @subnav
+      render :partial => "#{controller_name}/#{action_name}_navigation"
+    elsif File.exists?("#{views_path}/_navigation.html.erb") && @subnav
+      render :partial => "#{controller_name}/navigation"
+    end
+  end
+
 end
 

@@ -9,7 +9,8 @@
 <body class="<%= controller.controller_name %>">
 <h1>Ristretto</h1>
 
-<%= render :partial => 'layouts/navigation' %>
+<%= content_tag :div, show_navigation, :id => 'navigation' %>
+<%= content_tag :div, show_subnavigation, :id => 'subnavigation' %>
 
 <%= show_flash %>
 
