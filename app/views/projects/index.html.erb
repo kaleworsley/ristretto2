@@ -12,7 +12,7 @@
 <% @projects.each do |project| %>
   <tr>
     <td><%= project.name %></td>
-    <td><%= project.state %></td>
+    <td><%= project.state.humanize %></td>
     <td><%= link_to 'Show', customer_project_path(@customer, project) %></td>
     <td><%= link_to 'Edit', edit_customer_project_path(@customer, project) %></td>
     <td><%= link_to 'Destroy', customer_project_path(@customer, project), :confirm => 'Are you sure?', :method => :delete %></td>
