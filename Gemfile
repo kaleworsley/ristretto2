@@ -14,6 +14,7 @@ gem 'therubyracer'
 gem 'barista'
 gem 'simple_form'
 gem 'devise'
+gem 'devise_invitable'
 gem 'friendly_id'
 
 

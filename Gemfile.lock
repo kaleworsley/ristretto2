@@ -42,6 +42,9 @@ GEM
       bcrypt-ruby (~> 2.1.2)
       orm_adapter (~> 0.0.3)
       warden (~> 1.0.3)
+    devise_invitable (0.5.2)
+      devise (~> 1.4.1)
+      rails (>= 3.0.0, < 3.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     execjs (1.2.0)
@@ -108,6 +111,7 @@ PLATFORMS
 DEPENDENCIES
   barista
   devise
+  devise_invitable
   factory_girl_rails
   friendly_id
   jquery-rails
