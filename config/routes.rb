@@ -11,7 +11,8 @@ Ristretto::Application.routes.draw do
     get '/register' => 'devise/registrations#new', :as => :new_user_registration
   end
 
-  root :to => 'static#show', :static => 'home'
+  match '/' => 'dashboard#show', :as => :dashboard
+  root :to => 'dashboard#show'
   match ':static' => 'static#show'
 
   # The priority is based upon order of creation:
