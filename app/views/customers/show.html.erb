@@ -1,25 +1,5 @@
 <% title @customer.name %>
 
-<div class="main-details">
-<p>
-  <b>Physical Address:</b>
-  <%= @customer.default_unit.physical_address %>
-</p>
-
-<p>
-  <b>Postal Address:</b>
-  <%= @customer.default_unit.postal_address %>
-</p>
-
-<% @customer.default_unit.phones.each do |p| %>
-<p>
-  <b><%= p.label %>:</b>
-  <%= p.number %>
-</p>
-<% end %>
-
-</div>
-
 <div class="units">
 <% @customer.units.each do |unit| %>
 <div class="unit">

@@ -2,21 +2,10 @@
   <%= f.error_notification %>
 
   <div class="inputs">
-    <%= f.input :name %>
-
-    <%= f.simple_fields_for :default_unit do |d|  %>
-      <%= d.input :default, :as => :hidden %>
-      <%= d.input :physical_address %>
-      <%= d.input :postal_address %>
-
-      <%= d.simple_fields_for :phones do |p| %>
-        <%= p.input :label, :label => '', :placeholder => 'Work Phone' %> : <%= p.input :number, :label => '', :placeholder => '+64 3 355 5555' %>
-      <% end %>
-    <% end %>
-
     <div id="units">
     <%= f.simple_fields_for :units do |d|  %>
       <%= d.input :name %>
+      <%= d.input :position, :as => :hidden %>
       <%= d.input :physical_address %>
       <%= d.input :postal_address %>
 

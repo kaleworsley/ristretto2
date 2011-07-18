@@ -2,7 +2,23 @@ require 'test_helper'
 
 class ProjectsControllerTest < ActionController::TestCase
   setup do
-    @customer = Factory.create(:customer)
+    @customer_attributes = {
+      "units_attributes" => {
+        "0" => {
+          "name" => "Test Customer",
+          "position" => "0",
+          "postal_address" => "123 Fake St\r\nSomeplace",
+          "physical_address" => "123 Fake St\r\nSomeplace",
+          "phones_attributes" => {
+            "0" => {
+              "label" => "Main",
+              "number" => "555 5555"
+            }
+          }
+        }
+      }
+    }
+    @customer = Factory.create(:customer, @customer_attributes)
     @user = Factory.create(:user)
     @project = Factory.create(:project, :created_by => @user, :customer => @customer)
   end

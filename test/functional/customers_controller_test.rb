@@ -2,7 +2,23 @@ require 'test_helper'
 
 class CustomersControllerTest < ActionController::TestCase
   setup do
-    @customer = Factory.create(:customer)
+    @customer_attributes = {
+      "units_attributes" => {
+        "0" => {
+          "name" => "Test Customer",
+          "position" => "0",
+          "postal_address" => "123 Fake St\r\nSomeplace",
+          "physical_address" => "123 Fake St\r\nSomeplace",
+          "phones_attributes" => {
+            "0" => {
+              "label" => "Main",
+              "number" => "555 5555"
+            }
+          }
+        }
+      }
+    }
+    @customer = Factory.create(:customer, @customer_attributes)
     @user = Factory.create(:user)
   end
 
@@ -32,10 +48,19 @@ class CustomersControllerTest < ActionController::TestCase
   test "should create customer if logged in" do
     sign_in @user
     assert_difference('Customer.count') do
-      post :create, :customer => @customer.attributes
+      post :create, :customer => @customer_attributes
     end
 
     assert_redirected_to customer_path(assigns(:customer))
+  end
+
+
+  test "should not create customer if no unit name is given" do
+    sign_in @user
+    @customer_attributes["units_attributes"]["0"]["name"] = ''
+    assert_no_difference('Customer.count') do
+      post :create, :customer => @customer_attributes
+    end
   end
 
   test "should not create customer if not logged in" do
@@ -91,3 +116,4 @@ class CustomersControllerTest < ActionController::TestCase
   end
 
 end
+

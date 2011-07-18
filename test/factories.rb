@@ -7,17 +7,12 @@ end
 
 
 Factory.define :customer do |c|
-  c.sequence(:name) {|n| "Customer #{n}"}
-  c.association :default_unit
-end
 
-
-Factory.define :default_unit, :class => :unit do |d|
-  d.default true
 end
 
 Factory.define :unit do |u|
-
+  u.sequence(:name) {|n| "Test #{n}" }
+  u.association :customer
 end
 
 Factory.define :project do |p|
