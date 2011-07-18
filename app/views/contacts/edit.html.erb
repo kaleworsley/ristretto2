@@ -1,0 +1,16 @@
+<h1>Editing contact</h1>
+
+<%= simple_form_for(@contact, :url => customer_contact_path(@customer, @contact)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.association :unit, :collection => @customer.units_for_select %>
+    <%= f.input :role %>
+  </div>
+
+<%= render 'form', :f => f %>
+<% end %>
+
+<%= link_to 'Show', customer_contact_path(@customer, @contact) %> |
+<%= link_to 'Back', customer_contacts_path(@customer) %>
+

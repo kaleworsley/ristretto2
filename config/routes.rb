@@ -1,6 +1,7 @@
 Ristretto::Application.routes.draw do
 
   resources :customers do
+    resources :contacts
     resources :projects
   end
 

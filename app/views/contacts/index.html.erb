@@ -1,0 +1,29 @@
+<h1>Listing contacts</h1>
+
+<% @customer.units.each do |unit| %>
+
+<h3><%= unit.name%></h3>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% unit.contacts.each do |contact| %>
+  <tr>
+    <td><%= contact.user.email %></td>
+    <td><%= link_to 'Show', customer_contact_path(@customer, contact) %></td>
+    <td><%= link_to 'Edit', edit_customer_contact_path(@customer, contact) %></td>
+    <td><%= link_to 'Destroy', customer_contact_path(@customer, contact), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<% end %>
+<br />
+
+<%= link_to 'New Contact', new_customer_contact_path %>
+

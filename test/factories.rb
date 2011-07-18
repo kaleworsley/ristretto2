@@ -21,3 +21,8 @@ Factory.define :project do |p|
   p.association :created_by, :factory => :user
 end
 
+Factory.define :contact do |c|
+  c.association :user
+  c.association :unit
+end
+

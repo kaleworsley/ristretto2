@@ -25,6 +25,24 @@ class Customer < ActiveRecord::Base
     units.first.phones
   end
 
+  def units_for_select
+    units.sort_by {|u| name.to_s }.collect {|u| [u.name || u.customer.name, u.id]}
+  end
+
+  def users_for_select
+    User.all.collect {|u| [u.email, u.id]}
+  end
+
+  def contacts
+    units.collect(&:contacts).flatten!
+  end
+
+  def staff_members
+    contacts.collect(&:user)
+  end
+
+
+
   protected
 
   def must_have_at_least_one_unit
