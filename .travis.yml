@@ -1,2 +1,4 @@
-before_script: bundle exec rake ristretto:setup
+before_script:
+  - bundle exec rake ristretto:setup
+  - bundle exec rake db:setup
 
