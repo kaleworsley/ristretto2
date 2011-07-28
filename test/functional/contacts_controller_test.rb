@@ -20,20 +20,34 @@ class ContactsControllerTest < ActionController::TestCase
     }
     @customer = Factory.create(:customer, @customer_attributes)
     @contact = Factory.create(:contact, :unit => @customer.units.first)
+    @user = Factory.create(:user)
   end
 
-  test "should get index" do
+  test "should not get index if not logged in" do
+    get :index, :customer_id => @customer.to_param
+    assert_redirected_to new_user_session_url
+  end
+
+  test "should get index if logged in" do
+    sign_in @user
     get :index, :customer_id => @customer.to_param
     assert_response :success
     assert_not_nil assigns(:contacts)
   end
 
-  test "should get new" do
+  test "should not get new if not logged in" do
+    get :new, :customer_id => @customer.to_param
+    assert_redirected_to new_user_session_url
+  end
+
+  test "should get new if logged in" do
+    sign_in @user
     get :new, :customer_id => @customer.to_param
     assert_response :success
   end
 
-  test "should create contact" do
+  test "should create contact if logged in" do
+    sign_in @user
     assert_difference('Contact.count') do
       post :create, :contact => @contact.attributes, :customer_id => @customer.to_param
     end
@@ -41,27 +55,62 @@ class ContactsControllerTest < ActionController::TestCase
     assert_redirected_to customer_contact_path(assigns(:customer), assigns(:contact))
   end
 
-  test "should show contact" do
+  test "should not create contact if not logged in" do
+    assert_no_difference('Contact.count') do
+      post :create, :contact => @contact.attributes, :customer_id => @customer.to_param
+    end
+
+    assert_redirected_to new_user_session_url
+  end
+
+  test "should show contact if logged in" do
+    sign_in @user
     get :show, :id => @contact.to_param, :customer_id => @customer.to_param
     assert_response :success
   end
 
-  test "should get edit" do
+  test "should not show contact if not logged in" do
+    get :show, :id => @contact.to_param, :customer_id => @customer.to_param
+    assert_redirected_to new_user_session_url
+  end
+
+  test "should get edit if logged in" do
+    sign_in @user
     get :edit, :id => @contact.to_param, :customer_id => @customer.to_param
     assert_response :success
   end
 
-  test "should update contact" do
+  test "should not get edit if not logged in" do
+    get :edit, :id => @contact.to_param, :customer_id => @customer.to_param
+    assert_redirected_to new_user_session_url
+  end
+
+  test "should update contact if logged in" do
+    sign_in @user
     put :update, :id => @contact.to_param, :contact => @contact.attributes, :customer_id => @customer.to_param
     assert_redirected_to customer_contact_path(assigns(:customer), assigns(:contact))
   end
 
-  test "should destroy contact" do
+  test "should not update contact if not logged in" do
+    put :update, :id => @contact.to_param, :contact => @contact.attributes, :customer_id => @customer.to_param
+    assert_redirected_to new_user_session_url
+  end
+
+  test "should destroy contact if logged in" do
+    sign_in @user
     assert_difference('Contact.count', -1) do
       delete :destroy, :id => @contact.to_param, :customer_id => @customer.to_param
     end
 
     assert_redirected_to customer_contacts_path(assigns(:customer))
+  end
+
+  test "should not destroy contact if not logged in" do
+    assert_no_difference('Contact.count') do
+      delete :destroy, :id => @contact.to_param, :customer_id => @customer.to_param
+    end
+
+    assert_redirected_to new_user_session_url
   end
 end
 
