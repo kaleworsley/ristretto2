@@ -4,6 +4,7 @@ log/*.log
 tmp/
 public/system/*
 config/database.yml
+config/config.yml
 *~
 \#*\#
 
