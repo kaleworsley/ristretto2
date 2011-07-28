@@ -1,0 +1,1 @@
+before_script: rake ristretto:setup
