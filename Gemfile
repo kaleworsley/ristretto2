@@ -20,6 +20,7 @@ gem 'friendly_id'
 
 group :development, :test do
   gem 'factory_girl_rails'
+  gem "capybara"
 end
 
 # Use unicorn as the web server
