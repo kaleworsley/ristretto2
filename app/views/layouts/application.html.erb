@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Ristretto</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller.controller_name %>">
 <h1>Ristretto</h1>
@@ -20,4 +20,3 @@
 
 </body>
 </html>
-
