@@ -64,17 +64,6 @@ class StakeholdersControllerTest < ActionController::TestCase
     assert_redirected_to new_user_session_url
   end
 
-  test "should show stakeholder when logged in" do
-    sign_in @user
-    get :show, :id => @stakeholder.to_param, :customer_id => @customer.id, :project_id => @project.id
-    assert_response :success
-  end
-
-  test "should not show stakeholder when not logged in" do
-    get :show, :id => @stakeholder.to_param, :customer_id => @customer.id, :project_id => @project.id
-    assert_redirected_to new_user_session_url
-  end
-
   test "should get edit when logged in" do
     sign_in @user
     get :edit, :id => @stakeholder.to_param, :customer_id => @customer.id, :project_id => @project.id

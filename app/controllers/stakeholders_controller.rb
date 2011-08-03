@@ -14,19 +14,6 @@ class StakeholdersController < ApplicationController
     end
   end
 
-  # GET /stakeholders/1
-  # GET /stakeholders/1.xml
-  def show
-    @customer = Customer.find(params[:customer_id])
-    @project = @customer.projects.find(params[:project_id])
-    @stakeholder = @project.stakeholders.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml { render :xml => @stakeholder }
-    end
-  end
-
   # GET /stakeholders/new
   # GET /stakeholders/new.xml
   def new
