@@ -2,7 +2,9 @@ Ristretto::Application.routes.draw do
 
   resources :customers do
     resources :contacts
-    resources :projects
+    resources :projects do
+      resources :stakeholders
+    end
   end
 
   devise_for :users do

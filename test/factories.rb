@@ -27,3 +27,9 @@ Factory.define :contact do |c|
   c.association :unit
 end
 
+Factory.define :stakeholder do |s|
+  s.association :user
+  s.association :project
+  s.role "MyString"
+end
+

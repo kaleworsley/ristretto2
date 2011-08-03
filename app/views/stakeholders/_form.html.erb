@@ -1,0 +1,13 @@
+<%= simple_form_for([@customer, @project, @stakeholder]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.association :user, :collection => User.users_for_select %>
+    <%= f.input :role %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+

@@ -3,6 +3,8 @@ class Project < ActiveRecord::Base
   belongs_to :customer
   belongs_to :user
 
+  has_many :stakeholders
+
   validates_presence_of :state
   validates_presence_of :name
 

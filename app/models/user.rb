@@ -15,5 +15,8 @@ class User < ActiveRecord::Base
     self
   end
 
+  def User.users_for_select
+    all.collect {|u| [u.email, u.id]}
+  end
 end
 
