@@ -52,7 +52,7 @@ class ContactsControllerTest < ActionController::TestCase
       post :create, :contact => @contact.attributes, :customer_id => @customer.to_param
     end
 
-    assert_redirected_to customer_contact_path(assigns(:customer), assigns(:contact))
+    assert_redirected_to customer_contacts_path(assigns(:customer))
   end
 
   test "should not create contact if not logged in" do
@@ -60,17 +60,6 @@ class ContactsControllerTest < ActionController::TestCase
       post :create, :contact => @contact.attributes, :customer_id => @customer.to_param
     end
 
-    assert_redirected_to new_user_session_url
-  end
-
-  test "should show contact if logged in" do
-    sign_in @user
-    get :show, :id => @contact.to_param, :customer_id => @customer.to_param
-    assert_response :success
-  end
-
-  test "should not show contact if not logged in" do
-    get :show, :id => @contact.to_param, :customer_id => @customer.to_param
     assert_redirected_to new_user_session_url
   end
 
@@ -88,7 +77,7 @@ class ContactsControllerTest < ActionController::TestCase
   test "should update contact if logged in" do
     sign_in @user
     put :update, :id => @contact.to_param, :contact => @contact.attributes, :customer_id => @customer.to_param
-    assert_redirected_to customer_contact_path(assigns(:customer), assigns(:contact))
+    assert_redirected_to customer_contacts_path(assigns(:customer))
   end
 
   test "should not update contact if not logged in" do

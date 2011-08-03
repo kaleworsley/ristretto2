@@ -13,18 +13,6 @@ class ContactsController < ApplicationController
     end
   end
 
-  # GET /contacts/1
-  # GET /contacts/1.xml
-  def show
-    @customer = Customer.find(params[:customer_id])
-    @contact = Contact.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @contact }
-    end
-  end
-
   # GET /contacts/new
   # GET /contacts/new.xml
   def new
@@ -52,7 +40,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to(customer_contact_url(@customer, @contact), :notice => 'Contact was successfully created.') }
+        format.html { redirect_to(customer_contacts_url(@customer), :notice => 'Contact was successfully created.') }
         format.xml  { render :xml => @contact, :status => :created, :location => @contact }
       else
         format.html { render :action => "new" }
@@ -69,7 +57,7 @@ class ContactsController < ApplicationController
 
     respond_to do |format|
       if @contact.update_attributes(params[:contact])
-        format.html { redirect_to(customer_contact_url(@customer, @contact), :notice => 'Contact was successfully updated.') }
+        format.html { redirect_to(customer_contacts_url(@customer), :notice => 'Contact was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
