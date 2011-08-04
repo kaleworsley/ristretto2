@@ -35,7 +35,10 @@ class ContactsController < ApplicationController
   # POST /contacts.xml
   def create
     @customer = Customer.find(params[:customer_id])
-    @user = User.invite!({:email => params[:contact][:email]}, current_user)
+    if params[:contact][:email].present?
+      @user = User.invite!({:email => params[:contact][:email]}, current_user)
+      params[:contact][:user_id] = @user.id
+    end
     @contact = Contact.new(params[:contact])
 
     respond_to do |format|
