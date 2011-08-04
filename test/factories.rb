@@ -19,7 +19,6 @@ Factory.define :project do |p|
   p.name "Project"
   p.state "lead"
   p.association :customer
-  p.association :created_by, :factory => :user
 end
 
 Factory.define :contact do |c|

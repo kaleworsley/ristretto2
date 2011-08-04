@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @customer = Customer.find(params[:customer_id])
-    @project = @customer.projects.build(:created_by => current_user.id)
+    @project = @customer.projects.build
 
     respond_to do |format|
       format.html # new.html.erb

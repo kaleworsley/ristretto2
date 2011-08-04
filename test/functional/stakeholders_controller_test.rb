@@ -20,7 +20,7 @@ class StakeholdersControllerTest < ActionController::TestCase
     }
     @customer = Factory.create(:customer, @customer_attributes)
     @user = Factory.create(:user)
-    @project = Factory.create(:project, :created_by => @user, :customer => @customer)
+    @project = Factory.create(:project, :customer => @customer)
     @stakeholder = Factory.create(:stakeholder, :user => @user, :project => @project)
 
   end
