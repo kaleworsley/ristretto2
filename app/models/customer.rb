@@ -2,6 +2,9 @@ class Customer < ActiveRecord::Base
 
   has_many :projects
   has_many :units, :dependent => :destroy
+  has_many :contacts, :through => :units
+  has_many :staff_members, :through => :contacts, :uniq => true, :source => :user
+  has_one :default_unit, :class_name => 'Unit'
 
   accepts_nested_attributes_for :units, :reject_if => Proc.new { |attributes| attributes['name'].blank? && attributes['physical_address'].blank? && attributes['postal_address'].blank? && attributes['phones_attributes'].delete_if {|i,p| p['label'].blank? && p['number'].blank? }.empty? }
 
@@ -9,20 +12,10 @@ class Customer < ActiveRecord::Base
 
   has_friendly_id :name, :use_slug => true, :approximate_ascii => true, :max_length => 100
 
+  delegate :postal_address, :physical_address, :phones, :to => :default_unit
+
   def name
-    units.first.name
-  end
-
-  def postal_address
-    units.first.postal_address
-  end
-
-  def physical_address
-    units.first.physical_address
-  end
-
-  def phones
-    units.first.phones
+    default_unit.try(:name) || units.first.name
   end
 
   def units_for_select
@@ -32,16 +25,6 @@ class Customer < ActiveRecord::Base
   def users_for_select
     User.all.collect {|u| [u.email, u.id]}
   end
-
-  def contacts
-    units.collect(&:contacts).flatten!
-  end
-
-  def staff_members
-    contacts.collect(&:user)
-  end
-
-
 
   protected
 
