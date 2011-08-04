@@ -27,8 +27,8 @@ class CustomersController < ApplicationController
   # GET /customers/new.xml
   def new
     @customer = Customer.new
-    @customer.units.build(:position => 0)
-    @customer.units.build(:position => 1)
+    @customer.units.build(:position => @customer.units.size + 1)
+    @customer.units.build(:position => @customer.units.size + 1)
     @customer.units.each {|u| u.phones.build }
     respond_to do |format|
       format.html # new.html.erb
@@ -39,7 +39,7 @@ class CustomersController < ApplicationController
   # GET /customers/1/edit
   def edit
     @customer = Customer.find(params[:id])
-    @customer.units.build
+    @customer.units.build(:position => @customer.units.size + 1)
     @customer.units.each {|u| u.phones.build }
   end
 
