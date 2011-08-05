@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :projects, :through => :stakeholders, :uniq => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :full_name, :phones_attributes, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :staff, :full_name, :phones_attributes, :password, :password_confirmation, :remember_me
 
   accepts_nested_attributes_for :phones, :reject_if => proc { |attributes| attributes['label'].blank? && attributes['number'].blank? }
 
@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
 
   def User.users_for_select
     all.collect {|u| [u.email, u.id]}
+  end
+
+  def to_s
+    "#{full_name} <#{email}>"
   end
 end
 

@@ -12,5 +12,26 @@ namespace :ristretto do
       end
     end
   end
+
+  desc "Add a new user. You must supply NAME, EMAIL and PASSWORD. You may also supply STAFF=1 to give the user full permissions."
+  task :user => :environment do
+    if ENV['NAME'] && ENV['EMAIL'] && ENV['PASSWORD']
+      user = User.create({
+        :full_name => ENV['NAME'],
+        :email => ENV['EMAIL'].dup,
+        :password => ENV['PASSWORD'],
+        :password_confirmation => ENV['PASSWORD'],
+        :staff => (ENV['STAFF']) ? true : false
+      })
+      if user.save
+        puts "Added #{user}."
+      else
+        puts user.errors.full_messages
+      end
+    else
+      puts "You must supply NAME, EMAIL and PASSWORD"
+    end
+
+  end
 end
 
