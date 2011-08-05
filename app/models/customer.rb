@@ -1,8 +1,9 @@
 class Customer < ActiveRecord::Base
 
-  has_many :projects
+  has_many :projects, :dependent => :destroy
   has_many :units, :dependent => :destroy
   has_many :contacts, :through => :units
+  has_many :tickets, :through => :units
   has_many :staff_members, :through => :contacts, :uniq => true, :source => :user
   has_one :default_unit, :class_name => 'Unit'
 

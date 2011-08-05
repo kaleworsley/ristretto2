@@ -1,8 +1,9 @@
 class Unit < ActiveRecord::Base
 
   belongs_to :customer
-  has_many :phones, :as => :phoneable
-  has_many :contacts
+  has_many :phones, :as => :phoneable, :dependent => :destroy
+  has_many :contacts, :dependent => :destroy
+  has_many :tickets, :dependent => :destroy
 
   attr_accessible :phones_attributes, :name, :physical_address, :position, :postal_address
 
