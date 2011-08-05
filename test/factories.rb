@@ -35,5 +35,6 @@ end
 Factory.define :ticket do |t|
   t.description "This is a test ticket."
   t.association :unit
+  t.state 'open'
 end
 

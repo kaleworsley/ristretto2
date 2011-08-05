@@ -5,6 +5,9 @@ class Ticket < ActiveRecord::Base
 
   validates_presence_of :unit_id
   validates_presence_of :description
+  validates_presence_of :state
+
+  default_scope order(:created_at)
 
   STATES = %w(not_started open closed rejected)
 
@@ -18,6 +21,18 @@ class Ticket < ActiveRecord::Base
 
   def Ticket.states_for_select
     STATES.collect {|s| [s.humanize, s]}
+  end
+
+  def requested_by_user?
+    requested_by.present?
+  end
+
+  def requester
+    if requested_by_user?
+      requested_by.to_s
+    else
+      requested_by_name
+    end
   end
 end
 

@@ -9,7 +9,7 @@ class Unit < ActiveRecord::Base
 
   accepts_nested_attributes_for :phones, :reject_if => Proc.new { |attributes| attributes['label'].blank? && attributes['number'].blank? }
 
-  default_scope order('position')
+  default_scope order(:position)
 
   def Unit.units_for_select
     options = {}
@@ -18,6 +18,18 @@ class Unit < ActiveRecord::Base
       options[u.customer.name].push([u.name, u.id])
     end
     options
+  end
+
+  def to_s
+    name
+  end
+
+  def full_name
+    unless name == customer.name
+      "#{customer.name}, #{name}"
+    else
+      name
+    end
   end
 end
 
