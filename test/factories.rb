@@ -5,7 +5,6 @@ Factory.define :user do |u|
   u.after_build {|user| user.confirm!}
 end
 
-
 Factory.define :customer do |c|
 
 end
@@ -30,5 +29,11 @@ Factory.define :stakeholder do |s|
   s.association :user
   s.association :project
   s.role "MyString"
+end
+
+
+Factory.define :ticket do |t|
+  t.description "This is a test ticket."
+  t.association :unit
 end
 

@@ -1,0 +1,19 @@
+<%= simple_form_for(@ticket) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :unit_id do %>
+      <%= f.select :unit_id, option_groups_from_collection_for_select(Customer.all, :units, :name, :id, :name) %>
+    <% end %>
+    <%= f.association :requested_by, :collection => User.all %>
+    <%= f.input :requested_by_name %>
+    <%= f.input :assigned_to_id, :collection => User.all %>
+    <%= f.input :description %>
+    <%= f.input :state, :as => :select, :collection => Ticket.states_for_select, :include_blank => false %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+

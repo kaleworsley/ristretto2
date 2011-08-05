@@ -1,5 +1,7 @@
 Ristretto::Application.routes.draw do
 
+  resources :tickets
+
   resources :customers do
     resources :contacts, :except => [:show]
     resources :projects do
