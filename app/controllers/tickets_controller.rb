@@ -27,7 +27,7 @@ class TicketsController < ApplicationController
   # GET /tickets/new.xml
   def new
     @ticket = Ticket.new
-
+    @ticket.timeslices.build(:started => DateTime.now, :finished => DateTime.now, :created_by_id => current_user.id)
     respond_to do |format|
       format.html # new.html.erb
       format.xml { render :xml => @ticket }
@@ -37,6 +37,7 @@ class TicketsController < ApplicationController
   # GET /tickets/1/edit
   def edit
     @ticket = Ticket.find(params[:id])
+    @ticket.timeslices.build(:started => DateTime.now, :finished => DateTime.now, :created_by_id => current_user.id)
   end
 
   # POST /tickets

@@ -3,9 +3,13 @@ class Ticket < ActiveRecord::Base
   belongs_to :requested_by, :class_name => "User"
   belongs_to :unit
 
+  has_many :timeslices, :as => :timetrackable, :dependent => :destroy
+
   validates_presence_of :unit_id
   validates_presence_of :description
   validates_presence_of :state
+
+  accepts_nested_attributes_for :timeslices , :reject_if => Proc.new { |attributes| attributes['started'] == attributes['finished'] }
 
   default_scope order(:created_at)
 

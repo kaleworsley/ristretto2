@@ -1,6 +1,5 @@
 <%= simple_form_for(@ticket) do |f| %>
   <%= f.error_notification %>
-
   <div class="inputs">
     <%= f.input :unit_id do %>
       <%= f.select :unit_id, option_groups_from_collection_for_select(Customer.all, :units, :name, :id, :name) %>
@@ -11,6 +10,16 @@
     <%= f.input :description %>
     <%= f.input :state, :as => :select, :collection => Ticket.states_for_select, :include_blank => false %>
   </div>
+
+  <h3>Timeslices</h3>
+  <%= f.simple_fields_for :timeslices do |t| %>
+    <div class="inputs">
+      <%= t.input :created_by_id, :as => :hidden %>
+      <%= t.input :description %>
+      <%= t.input :started, :as => :string %>
+      <%= t.input :finished, :as => :string %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= f.button :submit %>
