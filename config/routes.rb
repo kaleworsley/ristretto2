@@ -8,6 +8,7 @@ Ristretto::Application.routes.draw do
     resources :contacts, :except => [:show]
     resources :projects do
       resources :stakeholders, :except => [:show]
+      resources :tasks
     end
   end
 

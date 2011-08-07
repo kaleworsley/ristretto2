@@ -46,3 +46,8 @@ Factory.define :timeslice do |t|
   t.association :created_by, :factory => :user
 end
 
+Factory.define :task do |s|
+  s.association :project
+  s.name "Test Task"
+end
+

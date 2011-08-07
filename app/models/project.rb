@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
 
   has_many :stakeholders, :dependent => :destroy
+  has_many :tasks
 
   validates_presence_of :state
   validates_presence_of :name
