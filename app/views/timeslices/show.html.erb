@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Timetrackable:</b>
+  <%= @timeslice.timetrackable_id %>
+</p>
+
+<p>
+  <b>Timetrackable type:</b>
+  <%= @timeslice.timetrackable_type %>
+</p>
+
+<p>
+  <b>Created by:</b>
+  <%= @timeslice.created_by %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @timeslice.description %>
+</p>
+
+<p>
+  <b>Started:</b>
+  <%= @timeslice.started %>
+</p>
+
+<p>
+  <b>Finished:</b>
+  <%= @timeslice.finished %>
+</p>
+
+
+<%= link_to 'Edit', edit_timeslice_path(@timeslice) %> |
+<%= link_to 'Back', timeslices_path %>

@@ -1,0 +1,33 @@
+<h1>Listing timeslices</h1>
+
+<table>
+  <tr>
+    <th>Timetrackable</th>
+    <th>Timetrackable type</th>
+    <th>Created by</th>
+    <th>Description</th>
+    <th>Started</th>
+    <th>Finished</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @timeslices.each do |timeslice| %>
+  <tr>
+    <td><%= timeslice.timetrackable_id %></td>
+    <td><%= timeslice.timetrackable_type %></td>
+    <td><%= timeslice.created_by %></td>
+    <td><%= timeslice.description %></td>
+    <td><%= timeslice.started %></td>
+    <td><%= timeslice.finished %></td>
+    <td><%= link_to 'Show', timeslice %></td>
+    <td><%= link_to 'Edit', edit_timeslice_path(timeslice) %></td>
+    <td><%= link_to 'Destroy', timeslice, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Timeslice', new_timeslice_path %>

@@ -38,3 +38,11 @@ Factory.define :ticket do |t|
   t.state 'open'
 end
 
+Factory.define :timeslice do |t|
+  t.association :timetrackable, :factory => :ticket
+  t.started DateTime.now-1.hour
+  t.finished DateTime.now
+  t.description 'Timeslice description.'
+  t.association :created_by, :factory => :user
+end
+

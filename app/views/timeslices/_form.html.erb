@@ -1,0 +1,17 @@
+<%= simple_form_for(@timeslice) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :timetrackable_id, :as => :hidden %>
+    <%= f.input :timetrackable_type, :as => :hidden %>
+    <%= f.input :created_by_id, :as => :hidden %>
+    <%= f.input :description %>
+    <%= f.input :started %>
+    <%= f.input :finished %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+

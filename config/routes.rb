@@ -1,5 +1,7 @@
 Ristretto::Application.routes.draw do
 
+  resources :timeslices
+
   resources :tickets
 
   resources :customers do

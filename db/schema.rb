@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110804221459) do
+ActiveRecord::Schema.define(:version => 20110805023910) do
 
   create_table "contacts", :force => true do |t|
     t.integer  "unit_id"
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(:version => 20110804221459) do
     t.integer  "assigned_to_id"
     t.text     "description"
     t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "timeslices", :force => true do |t|
+    t.integer  "timetrackable_id"
+    t.string   "timetrackable_type"
+    t.integer  "created_by_id"
+    t.text     "description"
+    t.datetime "started"
+    t.datetime "finished"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
