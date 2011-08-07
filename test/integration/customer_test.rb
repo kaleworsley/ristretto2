@@ -1,6 +1,6 @@
 require 'integration_test_helper'
 
-class UserTest < ActionController::IntegrationTest
+class CustomerTest < ActionController::IntegrationTest
   def setup
     @user = Factory.create(:user, :email => 'test@example.com', :password => 'password')
     @customer_attributes = {
