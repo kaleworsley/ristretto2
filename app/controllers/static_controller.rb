@@ -3,7 +3,7 @@ class StaticController < ApplicationController
   def show
     @static = params[:static].to_s.gsub(/\W/,'')
     unless partial_exists?(@static)
-      render '_missing', :status => 404
+      render '_not_found', :status => 404
     end
   end
 

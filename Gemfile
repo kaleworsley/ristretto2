@@ -24,6 +24,7 @@ gem 'simple_form'
 gem 'devise'
 gem 'devise_invitable'
 gem 'friendly_id', ">= 3.3.0.rc2"
+gem 'cancan'
 
 group :development, :test do
   gem 'factory_girl_rails'
