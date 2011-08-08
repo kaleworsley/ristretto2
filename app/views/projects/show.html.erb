@@ -8,6 +8,12 @@
   <%= @project.state.humanize %>
 </p>
 
+<h3>Stages</h3>
+<ul>
+<% @project.stages.each do |stage| %>
+  <li><%= stage.name%> - <%= link_to 'Edit', edit_customer_project_stage_path(@customer, @project, stage) %></li>
+<% end %>
+</ul>
 
 <%= link_to 'Edit', edit_customer_project_path %> |
 <%= link_to 'Back', customer_projects_path %>

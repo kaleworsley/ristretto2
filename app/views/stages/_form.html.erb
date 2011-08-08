@@ -1,0 +1,14 @@
+<%= simple_form_for([@customer, @project, @stage]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :project_id, :as => :hidden %>
+    <%= f.input :name %>
+    <%= f.input :deadline %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+

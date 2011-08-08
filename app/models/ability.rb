@@ -5,12 +5,13 @@ class Ability
     if user.staff
       can :manage, :all
     else
-      can :manage, Contact
-      can :manage, Customer
-      can :manage, Project
-      can :manage, Stakeholder
-      can :manage, Task
-      can :manage, Unit
+      can :read, Contact
+      can :read, Customer
+      can :read, Project
+      can :read, Stakeholder
+      can :read, Task
+      can :read, Unit
+      can :read, Stage
     end
     # Define abilities for the passed in user here. For example:
     #

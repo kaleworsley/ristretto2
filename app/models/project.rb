@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
 
   has_many :stakeholders, :dependent => :destroy
   has_many :tasks
+  has_many :stages
 
   validates_presence_of :state
   validates_presence_of :name

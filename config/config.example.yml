@@ -5,6 +5,13 @@ common: &default
   :project_states:
     - duplicate
 
+  :project_stages:
+    - analysis
+    - concepts
+    - development
+    - review
+    - delivery
+
   :ticket_states:
     - duplicate
 

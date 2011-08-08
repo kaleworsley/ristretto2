@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110807224834) do
+ActiveRecord::Schema.define(:version => 20110808044106) do
 
   create_table "contacts", :force => true do |t|
     t.integer  "unit_id"
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(:version => 20110807224834) do
 
   add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
+
+  create_table "stages", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "name"
+    t.date     "deadline"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stakeholders", :force => true do |t|
     t.integer  "user_id"
