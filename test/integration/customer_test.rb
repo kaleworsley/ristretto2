@@ -25,7 +25,7 @@ class CustomerTest < ActionController::IntegrationTest
   test "create customer" do
     sign_in 'test@example.com', 'password'
     visit '/customers/new'
-    assert_equal '/customers/new', page.current_path
+    assert_equal '/customers/new', current_path
 
     fill_in 'Name', :with => 'New Customer'
     fill_in 'Physical address', :with => '123 Fake St'
@@ -35,52 +35,52 @@ class CustomerTest < ActionController::IntegrationTest
 
     click_button 'Create Customer'
 
-    assert_equal '/customers/new-customer', page.current_path
-    assert page.has_content? 'Customer was successfully created.'
-    assert page.has_content? 'New Customer'
-    assert page.has_content? 'Name: New Customer'
-    assert page.has_content? 'Physical Address: 123 Fake St'
-    assert page.has_content? 'Postal Address: 123 Fake St'
-    assert page.has_content? 'Main Number: 555 5555'
+    assert_equal '/customers/new-customer', current_path
+    assert has_content? 'Customer was successfully created.'
+    assert has_content? 'New Customer'
+    assert has_content? 'Name: New Customer'
+    assert has_content? 'Physical Address: 123 Fake St'
+    assert has_content? 'Postal Address: 123 Fake St'
+    assert has_content? 'Main Number: 555 5555'
   end
 
   test "customer list" do
     sign_in 'test@example.com', 'password'
     visit '/customers'
-    assert page.has_content? 'Listing customers'
-    assert page.has_content? 'Test Customer'
+    assert has_content? 'Listing customers'
+    assert has_content? 'Test Customer'
   end
 
   test "edit customer" do
     sign_in 'test@example.com', 'password'
     visit '/customers'
-    assert page.has_content? 'Test Customer'
+    assert has_content? 'Test Customer'
     click_link 'Edit'
-    assert_equal '/customers/test-customer/edit', page.current_path
+    assert_equal '/customers/test-customer/edit', current_path
 
-    assert page.has_field? 'Name', :with => 'Test Customer'
-    assert page.has_field? 'Physical address', :with => "123 Fake St\r\nSomeplace"
-    assert page.has_field? 'Postal address', :with => "123 Fake St\r\nSomeplace"
-    assert page.has_field? 'Label', :with => 'Main'
-    assert page.has_field? 'Number', :with => '555 5555'
+    assert has_field? 'Name', :with => 'Test Customer'
+    assert has_field? 'Physical address', :with => "123 Fake St\r\nSomeplace"
+    assert has_field? 'Postal address', :with => "123 Fake St\r\nSomeplace"
+    assert has_field? 'Label', :with => 'Main'
+    assert has_field? 'Number', :with => '555 5555'
 
     fill_in 'Name', :with => 'New Customer'
     fill_in 'Physical address', :with => "123 Fake St\r\nSome other place"
     fill_in 'Postal address', :with => "123 Fake St\r\nSome other place"
     click_button 'Update Customer'
-    assert page.has_content? 'Name: New Customer'
-    assert page.has_content? "Physical Address: 123 Fake St Some other place"
-    assert page.has_content? "Postal Address: 123 Fake St Some other place"
-    assert page.has_content? 'Customer was successfully updated.'
+    assert has_content? 'Name: New Customer'
+    assert has_content? "Physical Address: 123 Fake St Some other place"
+    assert has_content? "Postal Address: 123 Fake St Some other place"
+    assert has_content? 'Customer was successfully updated.'
   end
 
   test "delete customer" do
     sign_in 'test@example.com', 'password'
     visit '/customers'
-    page.has_content? 'New Customer'
+    assert has_content? 'New Customer'
     click_link 'Destroy'
-    assert_equal '/customers', page.current_path
-    page.has_no_content? 'New Customer'
+    assert_equal '/customers', current_path
+    assert find('table').has_no_content? 'New Customer'
   end
 end
 
