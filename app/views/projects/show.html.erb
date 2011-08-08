@@ -11,7 +11,7 @@
 <h3>Stages</h3>
 <ul>
 <% @project.stages.each do |stage| %>
-  <li><%= stage.name%> - <%= link_to 'Edit', edit_customer_project_stage_path(@customer, @project, stage) %></li>
+  <li><%= stage.name %> <%= "(#{stage.time_estimate})" %> <%= stage.deadline %> - <%= link_to 'Edit', edit_customer_project_stage_path(@customer, @project, stage) %></li>
 <% end %>
 </ul>
 

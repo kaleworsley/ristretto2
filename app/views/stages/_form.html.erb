@@ -3,7 +3,9 @@
 
   <div class="inputs">
     <%= f.input :project_id, :as => :hidden %>
-    <%= f.input :name %>
+    <%= f.input :name do %>
+      <strong><%= @stage.name %></strong>
+    <% end %>
     <%= f.input :deadline %>
   </div>
 
