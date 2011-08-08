@@ -1,10 +1,13 @@
 class StakeholdersController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource :customer, :through => :current_user
+  load_and_authorize_resource :project, :through => :customer
+  load_and_authorize_resource :stakeholder, :through => :project
 
   # GET /stakeholders
   # GET /stakeholders.xml
   def index
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @stakeholders = @project.stakeholders
 
@@ -17,7 +20,7 @@ class StakeholdersController < ApplicationController
   # GET /stakeholders/new
   # GET /stakeholders/new.xml
   def new
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @stakeholder = @project.stakeholders.build
 
@@ -29,7 +32,7 @@ class StakeholdersController < ApplicationController
 
   # GET /stakeholders/1/edit
   def edit
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @stakeholder = @project.stakeholders.find(params[:id])
   end
@@ -37,7 +40,7 @@ class StakeholdersController < ApplicationController
   # POST /stakeholders
   # POST /stakeholders.xml
   def create
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @stakeholder = @project.stakeholders.build(params[:stakeholder])
 
@@ -55,7 +58,7 @@ class StakeholdersController < ApplicationController
   # PUT /stakeholders/1
   # PUT /stakeholders/1.xml
   def update
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @stakeholder = @project.stakeholders.find(params[:id])
 
@@ -73,7 +76,7 @@ class StakeholdersController < ApplicationController
   # DELETE /stakeholders/1
   # DELETE /stakeholders/1.xml
   def destroy
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @stakeholder = @project.stakeholders.find(params[:id])
     @stakeholder.destroy

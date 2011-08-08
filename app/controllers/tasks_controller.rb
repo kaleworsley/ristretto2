@@ -1,10 +1,13 @@
 class TasksController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource :customer, :through => :current_user
+  load_and_authorize_resource :project, :through => :customer
+  load_and_authorize_resource :task, :through => :project
 
   # GET /tasks
   # GET /tasks.xml
   def index
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @tasks = @project.tasks
 
@@ -17,7 +20,7 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
 
@@ -30,7 +33,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   # GET /tasks/new.xml
   def new
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @task = @project.tasks.build
 
@@ -42,7 +45,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
   end
@@ -50,7 +53,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.xml
   def create
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @task = @project.tasks.build(params[:task])
 
@@ -68,7 +71,7 @@ class TasksController < ApplicationController
   # PUT /tasks/1
   # PUT /tasks/1.xml
   def update
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
 
@@ -86,7 +89,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.xml
   def destroy
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:project_id])
     @task = @project.tasks.find(params[:id])
     @task.destroy

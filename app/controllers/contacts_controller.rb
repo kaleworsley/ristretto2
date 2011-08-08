@@ -1,10 +1,12 @@
 class ContactsController < ApplicationController
-    before_filter :authenticate_user!
+  before_filter :authenticate_user!
+  load_and_authorize_resource :customer, :through => :current_user
+  load_and_authorize_resource :contact, :through => :customer
 
   # GET /contacts
   # GET /contacts.xml
   def index
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @contacts = @customer.contacts
 
     respond_to do |format|
@@ -16,7 +18,7 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   # GET /contacts/new.xml
   def new
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @contact = Contact.new
 
     respond_to do |format|
@@ -27,14 +29,14 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1/edit
   def edit
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @contact = Contact.find(params[:id])
   end
 
   # POST /contacts
   # POST /contacts.xml
   def create
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     if params[:contact][:email].present?
       @user = User.invite!({:email => params[:contact][:email]}, current_user)
       params[:contact][:user_id] = @user.id
@@ -55,7 +57,7 @@ class ContactsController < ApplicationController
   # PUT /contacts/1
   # PUT /contacts/1.xml
   def update
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @contact = Contact.find(params[:id], :readonly => false)
 
     respond_to do |format|
@@ -72,7 +74,7 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1
   # DELETE /contacts/1.xml
   def destroy
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @contact = Contact.find(params[:id])
     @contact.destroy
 

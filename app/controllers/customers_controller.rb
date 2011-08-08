@@ -1,10 +1,11 @@
 class CustomersController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource :through => :current_user
 
   # GET /customers
   # GET /customers.xml
   def index
-    @customers = Customer.all
+    @customers = current_user.customers.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +16,7 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.xml
   def show
-    @customer = Customer.find(params[:id])
+    @customer = current_user.customers.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +27,7 @@ class CustomersController < ApplicationController
   # GET /customers/new
   # GET /customers/new.xml
   def new
-    @customer = Customer.new
+    @customer = current_user.customers.new
     @customer.units.build(:position => @customer.units.size + 1)
     @customer.units.build(:position => @customer.units.size + 1)
     @customer.units.each {|u| u.phones.build }
@@ -38,7 +39,7 @@ class CustomersController < ApplicationController
 
   # GET /customers/1/edit
   def edit
-    @customer = Customer.find(params[:id])
+    @customer = current_user.customers.find(params[:id])
     @customer.units.build(:position => @customer.units.size + 1)
     @customer.units.each {|u| u.phones.build }
   end
@@ -46,10 +47,11 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.xml
   def create
-    @customer = Customer.new(params[:customer])
+    @customer = current_user.customers.new(params[:customer])
 
     respond_to do |format|
       if @customer.save
+        @customer.units.first.contacts.create(:user_id => current_user.id)
         format.html { redirect_to(@customer, :notice => 'Customer was successfully created.') }
         format.xml  { render :xml => @customer, :status => :created, :location => @customer }
       else
@@ -62,7 +64,7 @@ class CustomersController < ApplicationController
   # PUT /customers/1
   # PUT /customers/1.xml
   def update
-    @customer = Customer.find(params[:id])
+    @customer = current_user.customers.find(params[:id])
 
     respond_to do |format|
       if @customer.update_attributes(params[:customer])
@@ -78,7 +80,7 @@ class CustomersController < ApplicationController
   # DELETE /customers/1
   # DELETE /customers/1.xml
   def destroy
-    @customer = Customer.find(params[:id])
+    @customer = current_user.customers.find(params[:id])
     @customer.destroy
 
     respond_to do |format|

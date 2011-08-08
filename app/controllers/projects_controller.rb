@@ -1,10 +1,12 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource :customer, :through => :current_user
+  load_and_authorize_resource :project, :through => :customer
 
   # GET /projects
   # GET /projects.xml
   def index
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @projects = @customer.projects
 
     respond_to do |format|
@@ -16,7 +18,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:id])
 
     respond_to do |format|
@@ -28,7 +30,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   # GET /projects/new.xml
   def new
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.build
 
     respond_to do |format|
@@ -39,14 +41,14 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:id])
   end
 
   # POST /projects
   # POST /projects.xml
   def create
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.build(params[:project])
 
     respond_to do |format|
@@ -63,7 +65,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:id])
 
     respond_to do |format|
@@ -80,7 +82,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.xml
   def destroy
-    @customer = Customer.find(params[:customer_id])
+    @customer = current_user.customers.find(params[:customer_id])
     @project = @customer.projects.find(params[:id])
     @project.destroy
 

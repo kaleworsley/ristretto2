@@ -3,6 +3,7 @@ Factory.define :user do |u|
   u.password 'password'
   u.password_confirmation 'password'
   u.after_build {|user| user.confirm!}
+  u.staff true
 end
 
 Factory.define :customer do |c|

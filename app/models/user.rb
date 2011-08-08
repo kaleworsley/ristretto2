@@ -17,6 +17,14 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :phones, :reject_if => proc { |attributes| attributes['label'].blank? && attributes['number'].blank? }
 
+  def customers
+    if staff
+      Customer
+    else
+      Customer.where(:id => (employers + projects.collect(&:customer)).uniq.collect(&:id))
+    end
+  end
+
   def with_phones
     self.phones.build
     self
