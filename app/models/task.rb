@@ -8,7 +8,7 @@ class Task < ActiveRecord::Base
 
   has_friendly_id :name, :use_slug => true, :approximate_ascii => true, :max_length => 100
 
-  STATES = %w(not_started started delivered accepted rejected)
+  STATES = %w(not_started started delivered accepted rejected) | CONFIG[:task_states]
 
   STATES.each do |state|
     scope state.to_sym, where(:state => state)

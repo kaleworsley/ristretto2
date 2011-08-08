@@ -13,7 +13,7 @@ class Ticket < ActiveRecord::Base
 
   default_scope order(:created_at)
 
-  STATES = %w(not_started open closed rejected)
+  STATES = %w(not_started open closed rejected) | CONFIG[:ticket_states]
 
   STATES.each do |state|
     scope state.to_sym, where(:state => state)

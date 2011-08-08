@@ -1,6 +1,19 @@
+common: &default
+  :task_states:
+    - duplicate
+
+  :project_states:
+    - duplicate
+
+  :ticket_states:
+    - duplicate
+
 development:
+  <<: *default
 
 test:
+  <<: *default
 
 production:
+  <<: *default
 

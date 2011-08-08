@@ -11,7 +11,7 @@ class Project < ActiveRecord::Base
 
   has_friendly_id :name, :use_slug => true, :approximate_ascii => true, :max_length => 100
 
-  STATES = %w(lead proposed current postponed complete)
+  STATES = %w(lead proposed current postponed complete) | CONFIG[:project_states]
 
   STATES.each do |state|
     scope state.to_sym, where(:state => state)
