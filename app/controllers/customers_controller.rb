@@ -27,7 +27,7 @@ class CustomersController < ApplicationController
   # GET /customers/new
   # GET /customers/new.xml
   def new
-    @customer = current_user.customers.new
+    @customer = Customer.new
     @customer.units.build(:position => @customer.units.size + 1)
     @customer.units.build(:position => @customer.units.size + 1)
     @customer.units.each {|u| u.phones.build }
@@ -47,7 +47,7 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.xml
   def create
-    @customer = current_user.customers.new(params[:customer])
+    @customer = Customer.new(params[:customer])
 
     respond_to do |format|
       if @customer.save

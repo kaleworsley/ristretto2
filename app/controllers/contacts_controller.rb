@@ -30,7 +30,7 @@ class ContactsController < ApplicationController
   # GET /contacts/1/edit
   def edit
     @customer = current_user.customers.find(params[:customer_id])
-    @contact = Contact.find(params[:id])
+    @contact = @customer.contacts.find(params[:id])
   end
 
   # POST /contacts
@@ -58,7 +58,7 @@ class ContactsController < ApplicationController
   # PUT /contacts/1.xml
   def update
     @customer = current_user.customers.find(params[:customer_id])
-    @contact = Contact.find(params[:id], :readonly => false)
+    @contact = @customer.contacts.find(params[:id], :readonly => false)
 
     respond_to do |format|
       if @contact.update_attributes(params[:contact])
@@ -75,7 +75,7 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1.xml
   def destroy
     @customer = current_user.customers.find(params[:customer_id])
-    @contact = Contact.find(params[:id])
+    @contact = @customer.contacts.find(params[:id])
     @contact.destroy
 
     respond_to do |format|
