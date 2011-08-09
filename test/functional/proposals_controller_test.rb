@@ -25,12 +25,6 @@ class ProposalsControllerTest < ActionController::TestCase
   end
 
 
-  test "should get new" do
-    sign_in @user
-    get :new, :customer_id => @customer.id, :project_id => @project.id
-    assert_response :success
-  end
-
   test "should create proposal" do
     sign_in @user
     assert_difference('Proposal.count') do

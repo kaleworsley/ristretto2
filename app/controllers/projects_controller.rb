@@ -53,9 +53,6 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        CONFIG[:project_stages].each do |stage|
-          @project.stages.build(:name => stage.humanize).save!
-        end
         format.html { redirect_to(customer_project_url(@customer, @project), :notice => 'Project was successfully created.') }
         format.xml  { render :xml => @project, :status => :created, :location => @project }
       else

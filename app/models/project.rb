@@ -13,6 +13,7 @@ class Project < ActiveRecord::Base
   validates_presence_of :name
 
   accepts_nested_attributes_for :tasks, :reject_if => Proc.new {|attributes| attributes['name'].blank? }
+  accepts_nested_attributes_for :stages
 
   has_friendly_id :name, :use_slug => true, :approximate_ascii => true, :max_length => 100
 
@@ -28,6 +29,18 @@ class Project < ActiveRecord::Base
 
   def Project.states_for_select
     STATES.collect {|s| [s.humanize, s]}
+  end
+
+  def create_proposal
+    unless proposal.present?
+      @proposal = self.build_proposal(:hourly_rate => CONFIG[:proposal_hourly_rate], :version => CONFIG[:proposal_version]).save!
+      CONFIG[:project_stages].each do |stage|
+        self.stages.build(:name => stage.humanize).save!
+      end
+      @proposal
+    else
+      proposal
+    end
   end
 
 end

@@ -12,25 +12,12 @@ class ProposalsController < ApplicationController
     @proposal = @project.proposal
 
     respond_to do |format|
-      format.html { redirect_to new_customer_project_proposal_path(@customer, @project) unless @proposal.present? }
-      format.json { render :json => @proposal }
-    end
-  end
-
-  # GET /proposals/new
-  # GET /proposals/new.json
-  def new
-    @customer = current_user.customers.find(params[:customer_id])
-    @project = @customer.projects.find(params[:project_id])
-    @proposal = @project.build_proposal(:hourly_rate => CONFIG[:proposal_hourly_rate], :version => CONFIG[:proposal_version])
-
-    @proposal.stages.each do |stage|
-      @proposal.project.tasks.build(:stage => stage)
-      @proposal.project.tasks.build(:stage => stage)
-    end
-
-    respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+        unless @proposal.present?
+          @project.create_proposal
+          redirect_to edit_customer_project_proposal_path(@customer, @project)
+        end
+      end
       format.json { render :json => @proposal }
     end
   end

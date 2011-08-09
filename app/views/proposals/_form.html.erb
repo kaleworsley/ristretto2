@@ -12,6 +12,12 @@
 
   <div class="cost">
     <%= f.simple_fields_for(:project) do |p| %>
+      <%= p.simple_fields_for(:stages) do |s| %>
+        <%= content_for "stage-#{s.object.id}-deadline" do %>
+          <%= s.input :deadline %>
+          <%= s.input :id, :as => :hidden %>
+        <% end %>
+      <% end %>
       <%= p.simple_fields_for(:tasks) do |t| %>
         <%= content_for "stage-#{t.object.stage_id}" do %>
           <tr>
@@ -24,7 +30,7 @@
     <% end %>
     <table>
     <% @proposal.stages.each do |stage| %>
-      <tr><td colspan="3"><h3><%= stage.name %></h3></td></tr>
+      <tr><td colspan="2"><h3><%= stage.name %></h3></td><td><%= yield("stage-#{stage.id}-deadline") %></td></tr>
       <tr><th>Task</th><th>Time Estimate</th><th>Cost</th></tr>
       <%= yield("stage-#{stage.id}") %>
     <% end %>

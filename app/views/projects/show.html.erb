@@ -8,12 +8,14 @@
   <%= @project.state.humanize %>
 </p>
 
+<% if @project.stages.present? %>
 <h3>Stages</h3>
 <ul>
 <% @project.stages.each do |stage| %>
-  <li><%= stage.name %> <%= "(#{stage.time_estimate})" %> <%= stage.deadline %> - <%= link_to 'Edit', edit_customer_project_stage_path(@customer, @project, stage) %></li>
+  <li><%= stage.name %> <%= "(#{stage.time_estimate})" %> <%= stage.deadline %></li>
 <% end %>
 </ul>
+<% end %>
 
 <%= link_to 'Edit', edit_customer_project_path %> |
 <%= link_to 'Tasks', customer_project_tasks_path(@customer, @project) %> |
