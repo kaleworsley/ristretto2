@@ -3,20 +3,27 @@
 <div class="units">
 <% @customer.units.each do |unit| %>
 <div class="unit">
+
+<% if unit.name.present? %>
 <p>
   <b>Name:</b>
   <%= unit.name %>
 </p>
+<% end %>
 
+<% if unit.physical_address.present? %>
 <p>
   <b>Physical Address:</b>
   <%= unit.physical_address %>
 </p>
+<% end %>
 
+<% if unit.postal_address.present? %>
 <p>
   <b>Postal Address:</b>
   <%= unit.postal_address %>
 </p>
+<% end %>
 
 <% unit.phones.each do |p| %>
 <p>
@@ -30,5 +37,7 @@
 </div>
 
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to 'Projects', customer_projects_path(@customer) %> |
+<%= link_to 'Contacts', customer_contacts_path(@customer) %> |
 <%= link_to 'Back', customers_path %>
 

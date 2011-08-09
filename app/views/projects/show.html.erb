@@ -16,5 +16,8 @@
 </ul>
 
 <%= link_to 'Edit', edit_customer_project_path %> |
+<%= link_to 'Tasks', customer_project_tasks_path(@customer, @project) %> |
+<%= link_to 'Stakeholders', customer_project_stakeholders_path(@customer, @project) %> |
+<%= link_to 'Proposal', customer_project_proposal_path(@customer, @project) %> |
 <%= link_to 'Back', customer_projects_path %>
 

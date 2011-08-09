@@ -4,16 +4,14 @@
   <tr>
     <th>User</th>
     <th>Role</th>
-    <th>Project</th>
     <th></th>
     <th></th>
   </tr>
 
 <% @stakeholders.each do |stakeholder| %>
   <tr>
-    <td><%= stakeholder.user_id %></td>
+    <td><%= stakeholder.user %></td>
     <td><%= stakeholder.role %></td>
-    <td><%= stakeholder.project_id %></td>
     <td><%= link_to 'Edit', edit_customer_project_stakeholder_path(@customer, @project, stakeholder) %></td>
     <td><%= link_to 'Destroy', customer_project_stakeholder_path(@customer, @project, stakeholder), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
