@@ -12,7 +12,7 @@ class Project < ActiveRecord::Base
   validates_presence_of :state
   validates_presence_of :name
 
-  accepts_nested_attributes_for :tasks, :reject_if => Proc.new {|attributes| attributes['name'].blank? }
+  accepts_nested_attributes_for :tasks, :reject_if => Proc.new {|attributes| attributes['description'].blank? }
   accepts_nested_attributes_for :stages
 
   has_friendly_id :name, :use_slug => true, :approximate_ascii => true, :max_length => 100

@@ -2,11 +2,10 @@
 
 <table>
   <tr>
-    <th>Name</th>
+    <th>Description</th>
     <th>State</th>
     <th>Time estimate</th>
     <th>Assigned to</th>
-    <th>Description</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,11 +13,10 @@
 
 <% @tasks.each do |task| %>
   <tr>
-    <td><%= task.name %></td>
+    <td><%= task.description %></td>
     <td><%= task.state.to_s.humanize %></td>
     <td><%= task.time_estimate %></td>
     <td><%= task.assigned_to.to_s %></td>
-    <td><%= task.description %></td>
     <td><%= link_to 'Show', customer_project_task_path(@customer, @project, task) %></td>
     <td><%= link_to 'Edit', edit_customer_project_task_path(@customer, @project, task) %></td>
     <td><%= link_to 'Destroy', customer_project_task_path(@customer, @project, task), :confirm => 'Are you sure?', :method => :delete %></td>

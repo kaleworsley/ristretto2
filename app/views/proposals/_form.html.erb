@@ -21,7 +21,7 @@
       <%= p.simple_fields_for(:tasks) do |t| %>
         <%= content_for "stage-#{t.object.stage_id}" do %>
           <tr>
-          <td><%= t.input :name, :label => false, :input_html => {:size => 100}, :required => false %></td>
+          <td><%= t.input :description, :label => false, :input_html => {:cols => 100, :rows => 1}, :required => false %></td>
           <td><%= t.input :time_estimate, :label => false, :input_html => {:size => 3} %></td>
           <td><%= t.input :stage_id, :as => :hidden %><%= t.input :project_id, :as => :hidden %><%= t.input :id, :as => :hidden %></td>
           </tr>

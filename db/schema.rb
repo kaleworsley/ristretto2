@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110808222433) do
+ActiveRecord::Schema.define(:version => 20110809042203) do
 
   create_table "contacts", :force => true do |t|
     t.integer  "unit_id"
@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(:version => 20110808222433) do
 
   create_table "tasks", :force => true do |t|
     t.integer  "project_id"
-    t.string   "name"
     t.string   "state"
     t.decimal  "time_estimate"
     t.integer  "assigned_to_id"

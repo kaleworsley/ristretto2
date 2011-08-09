@@ -4,10 +4,8 @@ class Task < ActiveRecord::Base
   belongs_to :stage
   has_many :timeslices, :as => :timetrackable, :dependent => :destroy
 
-  validates_presence_of :name
+  validates_presence_of :description
   validates_presence_of :project_id
-
-  has_friendly_id :name, :use_slug => true, :approximate_ascii => true, :max_length => 100
 
   STATES = %w(not_started started delivered accepted rejected) | CONFIG[:task_states]
 
