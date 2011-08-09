@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def User.users_for_select
-    all.collect {|u| [u.email, u.id]}
+    all.collect {|u| [u.to_s, u.id]}
   end
 
   def to_s
