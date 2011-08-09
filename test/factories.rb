@@ -52,3 +52,7 @@ Factory.define :task do |s|
   s.name "Test Task"
 end
 
+Factory.define :proposal do |s|
+  s.association :project
+end
+

@@ -1,14 +1,18 @@
 class Project < ActiveRecord::Base
 
   belongs_to :customer
-  belongs_to :user
 
   has_many :stakeholders, :dependent => :destroy
+  has_many :team_members, :through => :stakeholders, :conditions => {:staff => true }, :source => :user, :class_name => "User"
   has_many :tasks
   has_many :stages
 
+  has_one :proposal
+
   validates_presence_of :state
   validates_presence_of :name
+
+  accepts_nested_attributes_for :tasks, :reject_if => Proc.new {|attributes| attributes['name'].blank? }
 
   has_friendly_id :name, :use_slug => true, :approximate_ascii => true, :max_length => 100
 

@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :phones, :reject_if => proc { |attributes| attributes['label'].blank? && attributes['number'].blank? }
 
+  scope :staff, where(:staff => true)
+
   def customers
     if staff
       Customer

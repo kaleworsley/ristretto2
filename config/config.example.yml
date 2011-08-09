@@ -15,6 +15,9 @@ common: &default
   :ticket_states:
     - duplicate
 
+  :proposal_hourly_rate: 130
+  :proposal_version: 1.0
+
 development:
   <<: *default
 

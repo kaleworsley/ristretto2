@@ -10,6 +10,7 @@ Ristretto::Application.routes.draw do
       resources :stakeholders, :except => [:show]
       resources :stages, :only => [:edit, :update]
       resources :tasks
+      resource :proposal
     end
   end
 

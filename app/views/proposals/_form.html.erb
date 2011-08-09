@@ -1,0 +1,39 @@
+<%= simple_form_for([@customer, @project, @proposal], :url => customer_project_proposal_path(@customer, @project)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :project_id, :as => :hidden %>
+    <%= f.input :date %>
+    <%= f.input :version %>
+    <%= f.input :team_ids, :as => :check_boxes, :collection => User.staff, :checked => @proposal.team_member_ids, :label => 'Team members' %>
+    <%= f.input :hourly_rate %>
+    <%= f.input :content %>
+  </div>
+
+  <div class="cost">
+    <%= f.simple_fields_for(:project) do |p| %>
+      <%= p.simple_fields_for(:tasks) do |t| %>
+        <%= content_for "stage-#{t.object.stage_id}" do %>
+          <tr>
+          <td><%= t.input :name, :label => false, :input_html => {:size => 100}, :required => false %></td>
+          <td><%= t.input :time_estimate, :label => false, :input_html => {:size => 3} %></td>
+          <td><%= t.input :stage_id, :as => :hidden %><%= t.input :project_id, :as => :hidden %><%= t.input :id, :as => :hidden %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+    <table>
+    <% @proposal.stages.each do |stage| %>
+      <tr><td colspan="3"><h3><%= stage.name %></h3></td></tr>
+      <tr><th>Task</th><th>Time Estimate</th><th>Cost</th></tr>
+      <%= yield("stage-#{stage.id}") %>
+    <% end %>
+    </table>
+
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
