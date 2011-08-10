@@ -7,16 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller.controller_name %>">
-<h1>Ristretto</h1>
+  <header>
+    <section id="logo">
+      <img src="/assets/logo.png" alt="Egressive Logo" />
+    </section>
+  </header>
 
-<%= content_tag :div, show_navigation, :id => 'navigation' %>
-<%= content_tag :div, show_subnavigation, :id => 'subnavigation' %>
-
-<%= show_flash %>
-
-<%= content_tag :h1, yield(:title) if show_title? %>
-
-<%= yield %>
+  <%= show_flash %>
+  <%= content_tag :h1, yield(:title) if show_title? %>
+  <div id="content">
+  <%= yield %>
+  </div>
 
 </body>
 </html>
+

@@ -1,0 +1,188 @@
+/** Generic Panel Styles **/
+
+section.panel {
+  background-color: rgba(0,0,0,0.7);
+  border-width: 1px;
+  border-color: #fff;
+  border-style: solid;
+  -moz-box-shadow: 0px 0px 6px rgba(0,0,0,0.80);
+  -webkit-box-shadow: 0px 0px 6px rgba(0,0,0,0.80);
+  box-shadow: 0px 0px 6px rgba(0,0,0,0.80);
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px 20px 20px 20px;
+  border-radius: 20px;
+  margin: 0;
+  padding: 10px;
+  color: #fff;
+  overflow: hidden;
+}
+
+section.panel:hover {
+  overflow-y: auto;
+}
+
+section.panel form textarea,
+section.panel form input,
+section.panel form button {
+  width: 100%;
+}
+
+/** Dash board panels **/
+
+div#panels {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+body.aside div#panels {
+  margin: 0 345px 0 0;
+  padding: 0;
+  position: relative;
+}
+
+div#panels div.panel.last {
+  padding: 0 0 15px 0;
+}
+
+div#panels div.width-1 {
+  width: 50%;
+}
+
+div#panels div.width-2 {
+  width: 100%;
+}
+
+div#panels section h2 {
+  background-color: rgba(0,0,0,0.3);
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px ;
+  color: #fff;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0px 0px 5px 0px;
+  padding: 5px 12px 8px 12px;
+}
+
+div#panels section ol {
+  margin: 0 5px;
+  padding: 0;
+  list-style: none;
+}
+
+div#panels section ol li {
+  margin: 0;
+  padding: 3px 0 3px 0;
+  list-style: none;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: #7f7f7f;
+}
+
+div#panels .panel table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+}
+
+div#panels .panel table td {
+  margin: 0;
+  padding: 3px 5px;
+}
+
+div#panels .panel table td:nth-child(2) {
+  text-align: right;
+}
+
+div#panels div.panel {
+  margin: 0;
+  padding: 0;
+  float: left;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+div#panels div.panel section.panel {
+  height: 300px;
+  margin: 10px;
+}
+
+div#panels div.panel section.panel .content {
+  height: 260px;
+  overflow: auto;
+}
+
+div#panels div.panel.placeholder {
+  opacity: 0.4;
+}
+/** Aside for details **/
+
+aside {
+  width: 330px;
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  top: 75px;
+}
+
+aside section {
+  background-color: rgba(0,0,0,0.7);
+  border-width: 1px;
+  border-color: #fff;
+  border-style: solid;
+  -moz-box-shadow: 0px 0px 6px rgba(0,0,0,0.80);
+  -webkit-box-shadow: 0px 0px 6px rgba(0,0,0,0.80);
+  box-shadow: 0px 0px 6px rgba(0,0,0,0.80);
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px 20px 20px 20px;
+  border-radius: 20px;
+  margin: 0 0 25px 0;
+  padding: 10px;
+  color: #fff;
+}
+
+aside section.panel {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+aside section section {
+  margin: 0 0 15px 0;
+  padding: 0;
+  overflow: hidden;
+  border-width: 0;
+  background-color: transparent;
+  -moz-box-shadow: 0px 0px 0px rgba(0,0,0,0.80);
+  -webkit-box-shadow: 0px 0px 0px rgba(0,0,0,0.80);
+  box-shadow: 0px 0px 0px rgba(0,0,0,0.80);
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+
+}
+
+aside h2 {
+  background-color: rgba(0,0,0,0.3);
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px ;
+  color: #fff;
+  font-size: 15px;
+  font-weight: normal;
+  margin: -4px -4px 10px -4px;
+  padding: 5px 12px 8px 12px;
+}
+
+aside h3 {
+  background-color: #2a2a2a;
+  color: #fff;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0 0 5px 0;
+  padding: 3px 5px;
+  clear: both;
+}
+
