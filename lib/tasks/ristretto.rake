@@ -23,7 +23,7 @@ namespace :ristretto do
         :password_confirmation => ENV['PASSWORD'],
         :staff => (ENV['STAFF']) ? true : false
       })
-      if user.save
+      if user.save && user.confirm!
         puts "Added #{user}."
       else
         puts user.errors.full_messages
