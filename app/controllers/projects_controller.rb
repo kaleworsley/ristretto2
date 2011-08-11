@@ -1,7 +1,36 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource :customer, :through => :current_user
-  load_and_authorize_resource :project, :through => :customer
+  load_and_authorize_resource :customer, :through => :current_user, :except => [:scope]
+  load_and_authorize_resource :project, :through => :customer, :except => [:scope]
+
+  # GET /projects/:scope
+  # GET /projects/:scope.xml
+  def scope
+    @scope = params[:scope]
+    if Project.scopes.include?(@scope)
+      if current_user.staff
+        projects = Project
+      else
+        projects = current_user.projects
+      end
+
+      case @scope
+      when 'my'
+        @projects = current_user.projects
+      when 'all'
+        @projects = projects.all
+      else
+        @projects = projects.send(@scope)
+      end
+
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @projects }
+      end
+    else
+      render_404
+    end
+  end
 
   # GET /projects
   # GET /projects.xml

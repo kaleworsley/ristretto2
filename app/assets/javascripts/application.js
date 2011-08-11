@@ -13,6 +13,10 @@
 
 $(function() {
   window.addPanel({id: 'customer-list', title: 'Customers', content: '/customers.html'});
+  window.addPanel({id: 'current-projects-list', title: 'Current Projects', content: '/projects/current.html'});
+  window.addPanel({id: 'leads-list', title: 'Leads', content: '/projects/lead.html'});
+  window.addPanel({id: 'my-projects-list', title: 'My Projects', content: '/projects/my.html'});
+  window.addPanel({id: 'ticket-list', title: 'Tickets', content: '/tickets.html'});
 /*
   window.addPanel({id: 'ticket-list', title: 'Tickets', content: '/tickets.html'});
   window.addPanel({id: 'new-customer', title: 'New Customer', content: '/customers/new.html'});

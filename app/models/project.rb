@@ -27,6 +27,10 @@ class Project < ActiveRecord::Base
     STATES
   end
 
+  def Project.scopes
+    STATES + %w(my all)
+  end
+
   def Project.states_for_select
     STATES.collect {|s| [s.humanize, s]}
   end

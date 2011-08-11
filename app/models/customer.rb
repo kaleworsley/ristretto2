@@ -27,6 +27,10 @@ class Customer < ActiveRecord::Base
     User.all.collect {|u| [u.email, u.id]}
   end
 
+  def to_s
+    name
+  end
+
   protected
 
   def must_have_at_least_one_unit

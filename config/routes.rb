@@ -13,6 +13,8 @@ Ristretto::Application.routes.draw do
     end
   end
 
+  match '/projects/:scope' => 'projects#scope', :as => :scoped_projects
+
   devise_for :users do
     get '/login' => 'devise/sessions#new', :as => :new_user_session
     post '/login' => 'devise/sessions#create', :as => :user_session
