@@ -31,5 +31,6 @@
 </p>
 
 
-<%= link_to 'Edit', edit_timeslice_path(@timeslice) %> |
+<%= link_to 'Edit', edit_timeslice_path(@timeslice) if can? :update, @timeslice %> |
 <%= link_to 'Back', timeslices_path %>
+

@@ -7,15 +7,15 @@
 <table>
   <tr>
     <th>Email</th>
-    <th></th>
-    <th></th>
+    <% if can? :update, Contact %><th></th><% end %>
+    <% if can? :delete, Contact %><th></th><% end %>
   </tr>
 
 <% unit.contacts.each do |contact| %>
   <tr>
     <td><%= contact.user.email %></td>
-    <td><%= link_to 'Edit', edit_customer_contact_path(@customer, contact) %></td>
-    <td><%= link_to 'Destroy', customer_contact_path(@customer, contact), :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if can? :update, contact %><td><%= link_to 'Edit', edit_customer_contact_path(@customer, contact) %></td><% end %>
+    <% if can? :delete, contact %><td><%= link_to 'Destroy', customer_contact_path(@customer, contact), :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
@@ -23,5 +23,5 @@
 <% end %>
 <br />
 
-<%= link_to 'New Contact', new_customer_contact_path %>
+<%= link_to 'New Contact', new_customer_contact_path if can? :create, Contact%>
 

@@ -17,8 +17,8 @@
 </ul>
 <% end %>
 
-<%= link_to 'Edit', edit_customer_project_path %> |
+<%= link_to 'Edit', edit_customer_project_path if can? :update, @project %> |
 <%= link_to 'Stakeholders', customer_project_stakeholders_path(@customer, @project) %> |
-<%= link_to 'Proposal', customer_project_proposal_path(@customer, @project) %> |
+<%= link_to 'Proposal', customer_project_proposal_path(@customer, @project) if can? :read, @project.proposal %> |
 <%= link_to 'Back', customer_projects_path %>
 

@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', customer_project_proposal_path(@customer, @project) %>
+<%= link_to 'Show', customer_project_proposal_path(@customer, @project) if can? :read, @project.proposal %>
 

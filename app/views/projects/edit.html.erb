@@ -4,6 +4,6 @@
 <%= render 'form', :f => f %>
 <% end %>
 
-<%= link_to 'Show', customer_project_path(@customer, @project) %> |
+<%= link_to 'Show', customer_project_path(@customer, @project) if can? :read, @project %> |
 <%= link_to 'Back', customer_projects_path %>
 

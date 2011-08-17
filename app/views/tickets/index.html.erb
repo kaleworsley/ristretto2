@@ -7,9 +7,9 @@
     <th>Assigned to</th>
     <th>Description</th>
     <th>State</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% if can? :read, Ticket %><th></th><% end %>
+    <% if can? :update, Ticket %><th></th><% end %>
+   <% if can? :delete, Ticket %><th></th><% end %>
   </tr>
 
 <% @tickets.each do |ticket| %>
@@ -19,14 +19,14 @@
     <td><%= ticket.assigned_to %></td>
     <td><%= ticket.description %></td>
     <td><%= ticket.state.humanize %></td>
-    <td><%= link_to 'Show', ticket %></td>
-    <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-    <td><%= link_to 'Destroy', ticket, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if can? :read, ticket %><td><%= link_to 'Show', ticket %></td><% end %>
+    <% if can? :update, ticket %><td><%= link_to 'Edit', edit_ticket_path(ticket) %></td><% end %>
+    <% if can? :delete, ticket %><td><%= link_to 'Destroy', ticket, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Ticket', new_ticket_path %>
+<%= link_to 'New Ticket', new_ticket_path if can? :create, Ticket %>
 

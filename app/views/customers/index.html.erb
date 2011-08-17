@@ -3,21 +3,22 @@
 <table>
   <tr>
     <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% if can? :read, Customer %><th></th><% end %>
+    <% if can? :update, Customer %><th></th><% end %>
+    <% if can? :destroy, Customer %><th></th><% end %>
   </tr>
 
-<% @customers.each do |customer| %>
+<% collection.each do |customer| %>
   <tr>
     <td><%= customer.name %></td>
-    <td><%= link_to 'Show', customer %></td>
-    <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-    <td><%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if can? :read, customer %><td><%= link_to 'Show', customer %></td><% end %>
+    <% if can? :update, customer %><td><%= link_to 'Edit', edit_customer_path(customer) %></td><% end %>
+    <% if can? :destroy, customer %><td><%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Customer', new_customer_path %>
+<%= link_to 'New Customer', new_customer_path if can? :create, Customer %>
+

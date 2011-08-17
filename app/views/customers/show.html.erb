@@ -36,7 +36,7 @@
 <% end %>
 </div>
 
-<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to 'Edit', edit_customer_path(@customer) if can? :update, @customer %> |
 <%= link_to 'Projects', customer_projects_path(@customer) %> |
 <%= link_to 'Contacts', customer_contacts_path(@customer) %> |
 <%= link_to 'Back', customers_path %>

@@ -2,5 +2,6 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @customer %> |
+<%= link_to 'Show', @customer if can? :read, @customer %> |
 <%= link_to 'Back', customers_path %>
+

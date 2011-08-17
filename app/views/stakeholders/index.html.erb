@@ -4,21 +4,21 @@
   <tr>
     <th>User</th>
     <th>Role</th>
-    <th></th>
-    <th></th>
+    <% if can? :update, Stakeholder %><th></th><% end %>
+    <% if can? :delete, Stakeholder %><th></th><% end %>
   </tr>
 
 <% @stakeholders.each do |stakeholder| %>
   <tr>
     <td><%= stakeholder.user %></td>
     <td><%= stakeholder.role %></td>
-    <td><%= link_to 'Edit', edit_customer_project_stakeholder_path(@customer, @project, stakeholder) %></td>
-    <td><%= link_to 'Destroy', customer_project_stakeholder_path(@customer, @project, stakeholder), :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if can? :update, stakeholder %><td><%= link_to 'Edit', edit_customer_project_stakeholder_path(@customer, @project, stakeholder) %></td><% end %>
+    <% if can? :delete, stakeholder %><td><%= link_to 'Destroy', customer_project_stakeholder_path(@customer, @project, stakeholder), :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Stakeholder', new_customer_project_stakeholder_path(@customer, @project) %>
+<%= link_to 'New Stakeholder', new_customer_project_stakeholder_path(@customer, @project) if can? :create, Stakeholder %>
 

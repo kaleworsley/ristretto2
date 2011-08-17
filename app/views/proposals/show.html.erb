@@ -23,6 +23,6 @@
   <%= @proposal.content %>
 </p>
 
-<%= link_to 'Edit', edit_customer_project_proposal_path(@customer, @project) %> |
-<%= link_to 'Back', customer_project_path(@customer, @project) %>
+<%= link_to 'Edit', edit_customer_project_proposal_path(@customer, @project) if can? :update, @project.proposal %> |
+<%= link_to 'Back', customer_project_path(@customer, @project) if can? :read, @project %>
 
