@@ -25,6 +25,8 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'friendly_id', ">= 3.3.0.rc2"
 gem 'cancan'
+gem 'has_scope'
+gem 'inherited_resources'
 
 group :development, :test do
   gem 'factory_girl_rails'
