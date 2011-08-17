@@ -1,4 +1,9 @@
+require "application_responder"
+
 class ApplicationController < ActionController::Base
+  self.responder = ApplicationResponder
+  respond_to :html
+
   protect_from_forgery
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   rescue_from CanCan::AccessDenied, :with => :render_403

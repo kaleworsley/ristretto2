@@ -37,7 +37,7 @@ class ProposalsControllerTest < ActionController::TestCase
   test "should show proposal" do
     sign_in @user
     get :show, :id => @proposal.to_param, :customer_id => @customer.id, :project_id => @project.id
-    assert_response :success
+    assert_response 302
   end
 
   test "should get edit" do

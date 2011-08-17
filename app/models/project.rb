@@ -17,6 +17,9 @@ class Project < ActiveRecord::Base
 
   has_friendly_id :name, :use_slug => true, :approximate_ascii => true, :max_length => 100
 
+  default_scope { includes(:slug) }
+  scope :state, Proc.new { |state| where(:state => state) }
+
   STATES = %w(lead proposed current postponed complete) | CONFIG[:project_states]
 
   STATES.each do |state|

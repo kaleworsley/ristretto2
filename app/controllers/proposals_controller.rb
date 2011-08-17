@@ -3,85 +3,16 @@ class ProposalsController < ApplicationController
   load_and_authorize_resource :customer, :through => :current_user
   load_and_authorize_resource :project, :through => :customer
   load_and_authorize_resource :task, :through => :project
+  inherit_resources
+  nested_belongs_to :customer, :project, :singleton => true
 
-  # GET /proposals/1
-  # GET /proposals/1.json
+
   def show
-    @customer = current_user.customers.find(params[:customer_id])
-    @project = @customer.projects.find(params[:project_id])
-    @proposal = @project.proposal
-
-    respond_to do |format|
-      format.html do
-        unless @proposal.present?
-          @project.create_proposal
-          redirect_to edit_customer_project_proposal_path(@customer, @project)
-        end
-      end
-      format.json { render :json => @proposal }
-    end
-  end
-
-  # GET /proposals/1/edit
-  def edit
-    @customer = current_user.customers.find(params[:customer_id])
-    @project = @customer.projects.find(params[:project_id])
-    @proposal = @project.proposal
-
-    @proposal.stages.each do |stage|
-      @proposal.project.tasks.build(:stage => stage)
-      @proposal.project.tasks.build(:stage => stage)
-    end
-
-  end
-
-  # POST /proposals
-  # POST /proposals.json
-  def create
-    @customer = current_user.customers.find(params[:customer_id])
-    @project = @customer.projects.find(params[:project_id])
-    @proposal = @project.build_proposal(params[:proposal])
-
-    respond_to do |format|
-      if @proposal.save
-        format.html { redirect_to customer_project_proposal_path(@customer, @project), :notice => 'Proposal was successfully created.' }
-        format.json { render :json => @proposal, :status => :created, :location => @proposal }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @proposal.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /proposals/1
-  # PUT /proposals/1.json
-  def update
-    @customer = current_user.customers.find(params[:customer_id])
-    @project = @customer.projects.find(params[:project_id])
-    @proposal = @project.proposal
-
-    respond_to do |format|
-      if @proposal.update_attributes(params[:proposal])
-        format.html { redirect_to customer_project_proposal_path(@customer, @project), :notice => 'Proposal was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @proposal.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /proposals/1
-  # DELETE /proposals/1.json
-  def destroy
-    @customer = current_user.customers.find(params[:customer_id])
-    @project = @customer.projects.find(params[:project_id])
-    @proposal = @project.proposal
-    @proposal.destroy
-
-    respond_to do |format|
-      format.html { redirect_to customer_project_path(@customer, @project) }
-      format.json { head :ok }
+    unless @proposal.present?
+      @project.create_proposal
+      redirect_to edit_customer_project_proposal_path(@customer, @project)
+    else
+      show!
     end
   end
 end
