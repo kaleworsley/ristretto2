@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :employers, :through => :units, :uniq => true, :source => :customer
   has_many :stakeholders
   has_many :projects, :through => :stakeholders, :uniq => true
+  has_many :project_customers, :through => :projects, :class_name => 'Customer', :source => :customer
   has_many :requested_tickets, :foreign_key => :requested_by_id, :class_name => 'Ticket'
   has_many :assigned_tickets, :foreign_key => :assigned_to_id, :class_name => 'Ticket'
 
