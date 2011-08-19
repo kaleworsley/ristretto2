@@ -7,7 +7,7 @@ class ContactsController < ApplicationController
 
   def create
     if params[:contact][:email].present?
-      @user = User.invite!({:email => params[:contact][:email]}, current_user)
+      @user = User.invite!({:email => params[:contact][:email], :full_name => params[:contact][:full_name]}, current_user)
       params[:contact][:user_id] = @user.id
     end
     @contact = Contact.new(params[:contact])

@@ -9,6 +9,7 @@
       <%= f.association :user, :collection => @customer.users_for_select %>
       <%= "or" unless @customer.users_for_select.blank? %>
     <% end %>
+    <%= f.input :full_name %>
     <%= f.input :email %>
     <%= f.input :role %>
   </div>
