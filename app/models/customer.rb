@@ -26,7 +26,7 @@ class Customer < ActiveRecord::Base
   end
 
   def users_for_select
-    User.all.collect {|u| [u.email, u.id]}
+    User.all.collect {|u| [u, u.id]}
   end
 
   def to_s
