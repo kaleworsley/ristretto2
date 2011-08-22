@@ -13,6 +13,9 @@ window.addPopup = (popup, select = null) ->
       resizable: false
       open: (event, ui)->
         popupButtons($('#popup-' + popup.id))
+        $('body').addClass('popup')
+      close: (event, ui)->
+        $('body').removeClass('popup')
     )
 
   else
@@ -34,6 +37,12 @@ window.addPopup = (popup, select = null) ->
       width: $(window).width() - 400
       height: $(window).height() - 95
       resizable: false
+      open: (event, ui)->
+        popupButtons($('#popup-' + popup.id))
+        $('body').addClass('popup')
+      close: (event, ui)->
+        $('body').removeClass('popup')
+
     )
     popup_div.tabs('select', select)
 

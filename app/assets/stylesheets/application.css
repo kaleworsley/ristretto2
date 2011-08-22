@@ -71,3 +71,7 @@ article#dashboard:after {
   visibility: hidden;
 }
 
+body.popup #panels {
+  display: none;
+}
+
